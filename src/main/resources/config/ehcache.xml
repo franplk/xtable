@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cache name="model" maxElementsInMemory="5"
+		maxElementsOnDisk="0" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="300" diskPersistent="true">
+	</cache>
+
+	<cache name="data" maxElementsInMemory="30"
+		maxElementsOnDisk="1000" overflowToDisk="true"
+		timeToIdleSeconds="1800" diskSpoolBufferSizeMB="300">
+	</cache>
+	
+	<cache name="real" maxElementsInMemory="30" timeToIdleSeconds="1800" diskSpoolBufferSizeMB="300"></cache>
+
+	<cache name="page" maxElementsInMemory="5"
+		maxElementsOnDisk="30" overflowToDisk="true"
+		timeToIdleSeconds="900" timeToLiveSeconds="1800">
+	</cache>
+
+</ehcache>

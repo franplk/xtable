@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+     http://www.springframework.org/schema/context  
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:property-placeholder location="classpath:config/es.properties" ignore-unresolvable="true"/>
+	
+	<!-- ES Node Configuration -->
+	<bean id="esDataSource" class="com.emar.es.ESDataSource">
+		<property name="port" value="9300"></property>
+		<property name="configMap">
+			<map>
+				<entry key="cluster.name" value="${es.cluster.name}"/>
+			</map>
+		</property>
+		<property name="nodes">
+			<array value-type="java.lang.String">
+				<value>123.59.111.21</value>
+				<value>123.59.111.22</value>
+				<value>123.59.111.23</value>
+			</array>
+		</property>
+	</bean>
+	
+	<!-- RealTIme ES Query -->
+	<bean id="realTemplate" class="com.emar.es.EsTemplate">
+		<property name="type" value="${real.index.type}" />
+		<property name="prefix" value="${real.index.prefix}" />
+		<property name="dateType" value="${real.date.type}" />
+		<property name="groupSize" value="${es.agg.size}" />
+		<property name="esDataSource" ref="esDataSource" />
+	</bean>
+	
+	<!-- History ES Query -->
+	<bean id="historyTemplate" class="com.emar.es.EsTemplate">
+		<property name="type" value="${his.index.type}" />
+		<property name="prefix" value="${his.index.prefix}" />
+		<property name="dateType" value="${his.date.type}" />
+		<property name="groupSize" value="${es.agg.size}" />
+		<property name="esDataSource" ref="esDataSource" />
+	</bean>
+
+</beans>

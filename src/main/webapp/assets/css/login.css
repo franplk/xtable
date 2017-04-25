@@ -1,0 +1,23 @@
+body,form, fieldset, legend, button, input {
+border:medium none;
+margin: 0;
+padding: 0;
+}
+body,button, input, select {font: 12px/1.5 '����',tahoma, Srial, helvetica, sans-serif; }
+img/* img elements ͼƬԪ�� */{border:medium none;margin: 0;padding: 0;}
+body{ background:#0a76b0}
+#wrap{ width:960px; margin:0 auto; background:url(../imgs/login-bg.gif); height:613px;}
+#header{ height:170px;}
+#content-wrap{ width:593px; height:357px; background:url(../imgs/login-bg.png); margin:0 auto;}
+.content{ width:210px; height:237px; margin:0 auto;}
+.space{ height:103px;}
+.login-btn{ width:68px; height:28px; background:url(../imgs/login-btn.gif) -6px -6px;}
+.login-btn:hover{ background-position:-6px -49px;}
+.field{ height:50px;}
+.field label{ color:#dbf2ff}
+.btn{text-align:center;}
+.field input{ background:url(../imgs/login-input.gif); width:159px; height:29px; line-height:29px; text-indent:35px;}
+.field .password{ background-position:0 -29px;}
+.errmsg{ height:30px;}
+input.error {width:auto}
+label.error-txt{height:50px;color:red;font-size:12px;}

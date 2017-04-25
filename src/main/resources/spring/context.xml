@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation=" 
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<context:component-scan base-package="com.emar.sso" />
+	<context:component-scan base-package="com.emar.menu" />
+	<context:component-scan base-package="com.emar.model" />
+	<context:component-scan base-package="com.emar.query" />
+	<context:component-scan base-package="com.emar.xreport" />
+	<context:component-scan base-package="com.emar.download" />
+	
+	<!-- Add Authority Configuration -->
+	<context:property-placeholder location="classpath:config/permission.properties" ignore-unresolvable="true"/>
+	
+	<!-- Database -->
+	<import resource="classpath:spring/jdbc.xml" />
+	
+	<!-- ES -->
+	<import resource="classpath:spring/esconfig.xml" />
+	
+	<!-- ehcache -->
+	<import resource="classpath:spring/cache.xml" />
+	
+	<!-- Formula Of Complex Index -->
+	<util:map id="formulaMap" map-class="java.util.HashMap">
+		<entry key="imp_rate" value="100*imp/bid"/>
+		<entry key="clk_rate" value="100*clk/imp"/>
+		
+		<entry key="rtb_join_rate" value="100*bid/(req_num)"/>
+		<entry key="rtb_suc_rate" value="imp/bid"/>
+		<entry key="rtb_over_rate" value="100*rtb_price/rtb_cost-100"/>
+		
+		<entry key="bid_roi" value="order_price/bid_cost"/>
+		<entry key="rtb_roi" value="order_price/rtb_cost"/>
+		
+		<entry key="rtb_cpm" value="1000*rtb_cost/imp"/>
+		<entry key="rtb_cpc" value="rtb_cost/clk"/>
+		<entry key="bid_cpm" value="1000*bid_cost/imp"/>
+		<entry key="bid_cpc" value="bid_cost/clk"/>
+		
+		<entry key="arrival_rate" value="100*arrival_num/clk"/>
+		<entry key="twojump_num" value="arrival_num-jump_num"/>
+		<entry key="twojump_rate" value="100*(1-jump_num/arrival_num)"/>
+		
+		<entry key="avg_view" value="pv/arrival_num"/>
+		<entry key="avg_stoptime" value="stop_time/arrival_num"/>
+		
+		<entry key="reg_rate" value="reg_num/arrival_num"/>
+		<entry key="reg_cost" value="bid_cost/reg_num"/>
+		
+		<entry key="order_rate" value="order_num/arrival_num"/>
+		<entry key="profit" value="bid_cost-rtb_cost"/>
+		<entry key="profit_rate" value="100*bid_cost/rtb_cost-100"/>
+	</util:map>
+	
+	<!-- SSO Settings -->
+	<bean id="ssoConfig" class="com.emar.sso.bean.SSOConfig">
+		<property name="ssoLoginUrl" value="${server.login.url}" />
+		<property name="ssoLogoutUrl" value="${server.logout.url}"/>
+		<property name="callbackUrl" value="${client.callbackurl}"/>
+		<property name="appKey" value="${client.appkey}"/>
+		<property name="appSecret" value="${client.appsecret}"/>
+		<property name="appVersion" value="${client.appversion}"/>
+	</bean>
+	
+</beans>

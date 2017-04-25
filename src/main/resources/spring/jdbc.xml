@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+     http://www.springframework.org/schema/context  
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- Add Database Configuration -->
+	<context:property-placeholder location="classpath:config/db_test.properties" ignore-unresolvable="true"/>
+
+	<!-- DB pool For Model -->
+	<bean id="modelSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${model.jdbc.url}" />
+		<property name="username" value="${model.jdbc.username}" />
+		<property name="password" value="${model.jdbc.password}" />
+		<!-- The Span To Check Idle Connection, If Cancel,Set To 0 -->
+		<property name="idleConnectionTestPeriod" value="${bonecp.idle.time}" />
+		<property name="idleMaxAge" value="${bonecp.idle.maxage}" />
+		<property name="maxConnectionsPerPartition" value="${bonecp.part.max}" />
+		<property name="minConnectionsPerPartition" value="${bonecp.part.min}" />
+		<property name="partitionCount" value="${bonecp.part.count}" />
+		<property name="acquireIncrement" value="${bonecp.acquire.count}" />
+		<property name="statementsCacheSize" value="${bonecp.statement.cachesize}" />
+	</bean>
+	<bean id="modelSourceProxy" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+		<property name="targetDataSource" ref="modelSource" />
+	</bean>
+	<bean id="modelTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="modelSourceProxy" />
+	</bean>
+
+	<!-- DB pool For Data -->
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${data.jdbc.url}" />
+		<property name="username" value="${data.jdbc.username}" />
+		<property name="password" value="${data.jdbc.password}" />
+		<property name="idleConnectionTestPeriod" value="${bonecp.idle.time}" />
+		<property name="idleMaxAge" value="${bonecp.idle.maxage}" />
+		<property name="maxConnectionsPerPartition" value="${bonecp.part.max}" />
+		<property name="minConnectionsPerPartition" value="${bonecp.part.min}" />
+		<property name="partitionCount" value="${bonecp.part.count}" />
+		<property name="acquireIncrement" value="${bonecp.acquire.count}" />
+		<property name="statementsCacheSize" value="${bonecp.statement.cachesize}" />
+	</bean>
+	<bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
+		<property name="targetDataSource" ref="dataSource" />
+	</bean>
+	<bean id="dataTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSourceProxy" />
+	</bean>
+
+</beans>

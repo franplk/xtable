@@ -1,0 +1,21 @@
+body {
+	background:#FFF;overflow-x:hidden;
+	font: 12px/1.5 tahoma,Srial,helvetica,sans-serif;
+}
+
+body,th,td{border:medium none;margin:0;padding:0}
+
+a {text-decoration:none;color:#000}
+
+table {
+	align:center;border:0;cellSpacing:0;cellPadding:0;
+	border-collapse:collapse;border-spacing:0
+}
+
+table.welcome {margin:40px 0 20px 140px;height:100px;width:100%}
+
+div.boundary {width:100%;height:22px;margin:30px 0;background:#ecf4fc;padding-left:30px}
+
+td.key-user {text-align:right;width:150px}
+
+td.info-user {color:#880000}

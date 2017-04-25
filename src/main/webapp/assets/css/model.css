@@ -1,0 +1,40 @@
+body {background-color:#e6f4fa;overflow-x:hidden}
+body,ul,li,form,input,th,td{border:medium none;margin:0;padding:0;}
+body,input,select{font:12px/1.5 tahoma, Srial, helvetica, sans-serif;}
+a {text-decoration:none;color:#000;}
+a:hover {color:#3363a7;}
+table {border-collapse:collapse;border-spacing:0;}
+input select {width:70px;}
+
+/* Main Page CSS */
+header {top:0;width:100%;padding:3px;position:fixed;background-color:#e6f4fa;z-index:1000;}
+
+div.query-normal {height:25px;line-height:25px;border-bottom:1px #139667 solid;margin:5px 0;}
+
+span.query-date {float:left}
+span.query-date ul {overflow:hidden;list-style:none}
+span.query-date ul li {float:left;text-align:center;padding:0 10px;border-right:1px #139667 solid;}
+span.query-date ul li:last-child {border:none;}
+span.query-date ul li a {font-size:12px;display:block;}
+span.query-date ul li a:hover {cursor:pointer}
+span.query-date ul li a.selected {color:red}
+
+span#btn_action {padding-left:10px;float:right;margin-right:10px;}
+span#btn_action a {margin: 0 3px;font-size:10px;}
+
+section {margin-top:40px;}
+
+form {border-bottom:1px #139667 solid;margin-top:5px;padding:3px;}
+
+div.query-con{height:25px;line-height:25px;margin:5px 0;}
+div.query-con span.con-label {float:left;padding-left:30px;}
+div.query-con span.con-action{padding-left:30px;}
+
+ul.con_area li {background-color:#FFF;height:25px;line-height:25px;border-bottom:1px #139667 solid}
+ul.con_area li:hover {background-color:#EFF}
+ul.con_area li span {margin:0 40px 0 25px}
+ul.con_area li span.action {float:right;cursor:pointer;width:18px;height:18px;line-height:18px}
+
+table.datagrid-ftable{background:#e6f4fa;font:bold}
+
+span.minus {color:red}

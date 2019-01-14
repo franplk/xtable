@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.emar.model.domain.Dashboard;
+import com.emar.xreport.model.domain.Dashboard;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;

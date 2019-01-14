@@ -1,6 +1,6 @@
 package com.emar.exception;
 
-import com.emar.sso.bean.User;
+import com.emar.xreport.sso.bean.User;
 
 public class AuthException extends RuntimeException {
 

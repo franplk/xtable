@@ -16,25 +16,11 @@
 		<td id="nowTime"></td>
 	</tr>
 </table>
-<div class="boundary">
-	您的相关信息
-</div>
-<c:set var="user" value="${ sessionScope.auth_user }" scope="page"></c:set>
-<table class="userinfo">
-	<tr>
-		<td class="key-user">登陆帐号：</td><td class="info-user">登录名</td>
-		<td class="key-user">真实姓名：</td><td class="info-user">真实姓名</td>
-	</tr>
-	<tr>
-		<td class="key-user">用户ID：</td><td class="info-user">${ user.userId }</td>
-		<td class="key-user">您的角色：</td><td class="info-user">用户角色</td>
-	</tr>
-</table>
 </body>
 <script>
 	//系统时间显示
 	function sysTime() {
-		var timeStr = new Date(<%= System.currentTimeMillis()%>).toLocaleString() + ' 星期'
+		var timeStr = new Date().toLocaleString() + ' 星期'
 				+ '日一二三四五六'.charAt(new Date().getDay());
 		document.getElementById('nowTime').innerHTML = timeStr;
 		setTimeout(sysTime, 1000);

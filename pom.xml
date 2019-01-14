@@ -1,27 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.emar</groupId>
 	<artifactId>xreport</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>x-report</name>
 	<description>new unireport</description>
 	<url>http://maven.apache.org</url>
+	
 	<properties>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>2.5</servlet.version>
 		<spring.version>3.2.10.RELEASE</spring.version>
-		<mysql.version>5.1.30</mysql.version>
-		<elasearch.version>2.2.0</elasearch.version>
+		<mysql.version>5.1.47</mysql.version>
 		<bonecp.version>0.8.0.RELEASE</bonecp.version>
 		<poi.version>3.13</poi.version>
 		<aspectj.version>1.5.4</aspectj.version>
 		<fastjson.version>1.2.8</fastjson.version>
 		<eh.version>2.0.4</eh.version>
 	</properties>
-	<dependencies>
 	
+	<dependencies>
 		<!-- Junit -->
 		<dependency>
 		    <groupId>junit</groupId>
@@ -29,14 +32,12 @@
 		    <version>4.11</version>
 		    <scope>test</scope>
 		</dependency>
-	
 		<!-- Spring Test -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
 		    <version>${spring.version}</version>
 		</dependency>
-	
 		<!-- Servlet API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -50,20 +51,17 @@
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
 		</dependency>
-		
 		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
 		<!-- Spring MVC, includes Spring Web,Spring Core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -77,78 +75,60 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
-		
 		<!-- MySQL Driver -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-		
-		<!-- Elasticsearch -->
-		<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-			<version>${elasearch.version}</version>
-		</dependency>
-		
 		<!-- BoneCP Connector Pool -->
 		<dependency>
 			<groupId>com.jolbox</groupId>
 			<artifactId>bonecp-spring</artifactId>
 			<version>${bonecp.version}</version>
 		</dependency>
-		
 		<!-- POI Excel -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-web</artifactId>
 			<version>${eh.version}</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.jasypt</groupId>
 			<artifactId>jasypt</artifactId>
 			<version>1.9.2</version>
 		</dependency>
-		
 		<dependency>
     		<groupId>log4j</groupId>
     		<artifactId>log4j</artifactId>
     		<version>1.2.17</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>1.8.6</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

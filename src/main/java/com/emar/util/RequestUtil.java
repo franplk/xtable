@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.emar.query.domain.Pagination;
-import com.emar.xreport.domain.DateSpan;
-import com.emar.xreport.domain.QueryBean;
+import com.emar.xreport.query.domain.Pagination;
+import com.emar.xreport.web.domain.DateSpan;
+import com.emar.xreport.web.domain.QueryBean;
 
 public class RequestUtil {
 

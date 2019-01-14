@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.emar.xreport.domain.DateSpan;
+import com.emar.xreport.web.domain.DateSpan;
 
 public class DateUtil {
 

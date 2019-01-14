@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/index.css" />
 </head>
 <body class="easyui-layout">
-	
 	<!-- Header Logo -->
 	<div class="header" data-options="region:'north'" style="height:51px">
 		<div class="logo"></div>
@@ -20,14 +19,6 @@
 			<li><a href="javascript:void(0)" aim="/sso/logout">安全退出</a></li>
 		</ul>
 	</div>
-	
-	<!-- Footer Copyright -->
-	<div data-options="region:'south'" style="height:26px;">
-		<div class="copyright">
-			Copyright©版权所有，<a href="http://www.emar.com" target="_blank">北京亿玛在线科技有限公司</a>
-		</div>
-	</div>
-	
 	<!-- Left Menu -->
 	<div data-options="region:'west'" style="width:150px;">
 		<div class="easyui-accordion" data-options="fit:true,border:false,animate:false">
@@ -44,13 +35,18 @@
 			</c:forEach>
 		</div>
 	</div>
-	
 	<!-- Center Main Page -->
 	<div id="mainPage" data-options="region:'center'">
 		<div id="mainTabs" class="easyui-tabs" data-options="fit:true,border:false">
 			<div title="${ entryPage.title }" closable="true" iconCls='icon-ok'>
 				<iframe scrolling="auto" frameborder="0" src="${ entryPage.url }"></iframe>
 			</div>
+		</div>
+	</div>
+	<!-- Footer Copyright -->
+	<div data-options="region:'south'" style="height:26px;">
+		<div class="copyright">
+			Copyright©版权所有，<a href="http://www.emar.com" target="_blank">北京亿玛在线科技有限公司</a>
 		</div>
 	</div>
 </body>

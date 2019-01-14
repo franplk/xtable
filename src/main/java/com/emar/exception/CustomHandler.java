@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.emar.log.LogService;
-import com.emar.xreport.domain.WebResult;
+import com.emar.xreport.web.WebResult;
 
 import org.springframework.web.servlet.HandlerExceptionResolver;
 

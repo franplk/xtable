@@ -1,6 +1,6 @@
 package com.emar.api;
 
-import com.emar.xreport.domain.QueryBean;
+import com.emar.xreport.web.domain.QueryBean;
 
 /**
  * Data API Interface

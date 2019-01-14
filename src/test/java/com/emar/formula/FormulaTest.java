@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.emar.arith.SimpleArithmetic;
+import com.emar.util.arith.SimpleArithmetic;
 
 public class FormulaTest {
 

@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.emar.exception.BussinessException;
+import com.emar.xreport.exception.BusinessException;
 import com.emar.xreport.menu.domain.DrillMenu;
 import com.emar.xreport.model.domain.Dashboard;
 
@@ -25,15 +25,12 @@ public class DashboardDao {
 
 	/**
 	 * Get Dash Board By ID
-	 * @throws BussinessException 
+	 * @throws BusinessException
 	 */
 	public Dashboard getBoard(final String boardId) {
 		Dashboard dashboard = null;
 		try {
-			String sql = "SELECT dash.name,dash.board,dash.datespan,meta.name"
-					+ " FROM xv_dashboard dash,xv_metadata_column meta"
-					+ " WHERE dash.id=? AND meta.id=dash.dim_id";
-			
+			String sql = "SELECT dash.name,dash.board,dash.datespan,meta.name FROM xv_dashboard dash,xv_metadata_column meta WHERE dash.id=? AND meta.id=dash.dim_id";
 			dashboard = modelTemplate.queryForObject(sql, new Object[] { boardId }, new RowMapper<Dashboard>() {
 				@Override
 				public Dashboard mapRow(ResultSet rs, int idx) throws SQLException {
@@ -46,20 +43,18 @@ public class DashboardDao {
 				}
 			});
 		} catch (Exception e) {
-			throw new BussinessException("DASHBOARD[ID=" + boardId + "]NO DashBoard Found");
+			throw new BusinessException("DASHBOARD[ID=" + boardId + "]NO DashBoard Found");
 		}
 		List<DrillMenu> drillMenus = getDrillMenus(boardId);
 		dashboard.setDrillMenuList(drillMenus);
+
 		return dashboard;
 	}
 
 	public List<DrillMenu> getDrillMenus(String boardId) {
-		
 		List<DrillMenu> menus = null;
-		
 		try {
 			String sql = "SELECT drill_id,drill_name,drill_label,drill_title FROM xv_dashboard_drill WHERE board_id=?";
-			
 			menus = modelTemplate.query(sql, new Object[]{boardId}, new RowMapper<DrillMenu>(){
 				@Override
 				public DrillMenu mapRow(ResultSet rs, int idx) throws SQLException {
@@ -72,7 +67,7 @@ public class DashboardDao {
 				}
 			});
 		} catch (Exception e) {
-			throw new BussinessException("DASHBOARD[ID=" + boardId + "]Query DrillMenu Failed");
+			throw new BusinessException("DASHBOARD[ID=" + boardId + "]Query DrillMenu Failed");
 		}
 		if (null == menus) {
 			menus = new ArrayList<>(0);

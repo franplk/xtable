@@ -5,7 +5,7 @@ package com.emar.xreport.query.domain;
 
 import java.io.Serializable;
 
-import com.emar.util.udf.Aim;
+import com.emar.xreport.util.udf.Aim;
 
 /**
  * @author franplk

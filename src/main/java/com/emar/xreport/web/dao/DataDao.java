@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.emar.cache.DataCacheService;
-import com.emar.util.encypt.MD5Encrypt;
-import com.emar.exception.BussinessException;
-import com.emar.log.LogService;
+import com.emar.xreport.cache.DataCacheService;
+import com.emar.xreport.util.crypt.MD5Encrypt;
+import com.emar.xreport.exception.BusinessException;
+import com.emar.xreport.util.log.LogUtil;
 import com.emar.xreport.query.ModelUtil;
 import com.emar.xreport.query.domain.SQLQuery;
 import com.emar.xreport.web.domain.JTableData;
@@ -34,18 +34,19 @@ public class DataDao extends BaseDao {
 	 * Organize The Table Data
 	 */
 	public JTableData getTableData(SQLQuery query) {
-		JTableData tableData = new JTableData();
-		
+
 		// Total Records And Summary
 		Map<String, Object> sumAndCountData = getSumAndCount(query);
 		long records = (long) sumAndCountData.get("records");
+
+		// DataList
+		List<Map<String, Object>> dataList = getRowList(query);
+
+		JTableData tableData = new JTableData();
 		tableData.setTotal(records);
 		tableData.addSum(sumAndCountData);
-		
-		// DataList
-		List<Map<String, Object>> datas = getRowList(query);
-		tableData.setRows(datas);
-		
+		tableData.setRows(dataList);
+
 		return tableData;
 	}
 
@@ -54,8 +55,7 @@ public class DataDao extends BaseDao {
 	 */
 	public Map<String, Object> getSumAndCount(SQLQuery query) {
 		String sql = ModelUtil.getSumAndCountSQL(query);
-		LogService.info("Sum And Count SQL:" + sql, LogService.TYPE_QUERY);
-		
+		LogUtil.info("Sum And Count SQL:" + sql, LogUtil.TYPE_QUERY);
 		try {
 			String sqlKey = MD5Encrypt.encrypt(sql);
 			Map<String, Object> data = dataCacheService.getDataMap(sqlKey);
@@ -65,7 +65,7 @@ public class DataDao extends BaseDao {
 			}
 			return data;
 		} catch (Exception e) {
-			throw new BussinessException("QueryFailed[sql=" + sql + "]", e);
+			throw new BusinessException("QueryFailed[sql=" + sql + "]");
 		}
 	}
 
@@ -74,19 +74,17 @@ public class DataDao extends BaseDao {
 	 */
 	public List<Map<String, Object>> getRowList(SQLQuery query) {
 		String sql = ModelUtil.getListSql(query);
-		LogService.info("List SQL:" + sql, LogService.TYPE_QUERY);
-		
+		LogUtil.info("List SQL:" + sql, LogUtil.TYPE_QUERY);
 		try {
 			String sqlKey = MD5Encrypt.encrypt(sql);
 			List<Map<String, Object>> datas = dataCacheService.getDataList(sqlKey);
 			if (null == datas) {
 				datas = dataTemplate.queryForList(sql);
-				dataFilter (query.getDimColumn(), datas);
 				dataCacheService.put(sqlKey, datas);
 			}
 			return datas;
 		} catch (Exception e) {
-			throw new BussinessException("QueryFailed[sql=" + sql + "]", e);
+			throw new BusinessException("QueryFailed[sql=" + sql + "]");
 		}
 	}
 }

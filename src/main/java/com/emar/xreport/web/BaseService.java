@@ -1,20 +1,18 @@
 package com.emar.xreport.web;
 
+import com.emar.xreport.util.StringUtil;
+import com.emar.xreport.model.domain.ConfigColumn;
+import com.emar.xreport.model.domain.DataModel;
+import com.emar.xreport.model.domain.TableColumn;
+import com.emar.xreport.query.ModelUtil;
+import com.emar.xreport.query.domain.QueryBase;
+import com.emar.xreport.query.domain.SQLQuery;
+import com.emar.xreport.web.domain.QueryBean;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.emar.xreport.web.domain.DateSpan;
-import com.emar.xreport.web.domain.QueryBean;
-import com.emar.xreport.model.domain.ConfigColumn;
-import com.emar.xreport.model.domain.TableColumn;
-import com.emar.xreport.query.ModelUtil;
-import com.emar.xreport.query.domain.SQLQuery;
-import com.emar.xreport.query.domain.QueryBase;
-import com.emar.xreport.model.domain.DataModel;
-import com.emar.util.DateUtil;
-import com.emar.util.StringUtil;
 
 /**
  * @author Franplk
@@ -28,7 +26,7 @@ public abstract class BaseService {
 
 		setBaseQuery (query, dataModel, queryBean);
 		
-		/** Add Data Field **/
+		/** Add Date Field **/
 		query.setDateKey(dataModel.getDateKey());
 
 		/** Add dimension Exclude **/
@@ -53,23 +51,20 @@ public abstract class BaseService {
 		}
 
 		/*** Set Query Table */
-		String tableName = ModelUtil.getTableName(query, dataModel.getTheme());
+		String tableName = ModelUtil.getTableName(dataModel.getTheme());
 		query.setTable(tableName);
 
 		return query;
 	}
 	
-	protected List<TableColumn> getTableColumn (List<ConfigColumn> configColumns, boolean isES) {
+	protected List<TableColumn> getTableColumn (List<ConfigColumn> configColumns) {
 		List<TableColumn> tableColumns = new ArrayList<>();
 		for (ConfigColumn column : configColumns) {
 			TableColumn tableColumn = column.convert2TableColumn();
-			
-			if (isES && column.getSorting() == 0) {
+			if (column.getSorting() == 0) {
 				tableColumn.setSortable(false);
 			}
-			
 			tableColumns.add(tableColumn);
-			
 			String mapName = column.getMapName();
 			if (StringUtil.isNotEmpty(mapName)) {
 				String mapTitle = column.getMapTitle();
@@ -77,16 +72,6 @@ public abstract class BaseService {
 			}
 		}
 		return tableColumns;
-	}
-	
-	protected boolean isToday(QueryBean queryBean) {
-		DateSpan dateSpan = queryBean.getDateSpan();
-		return DateUtil.isToday(dateSpan);
-	}
-	
-	protected List<ConfigColumn> getQueryIndex (DataModel dataModel, QueryBean queryBean) {
-		List<String> idxList = queryBean.getIdxList();
-		return dataModel.getIdxes(idxList);
 	}
 	
 	private void setBaseQuery (QueryBase query, DataModel dataModel, QueryBean queryBean) {

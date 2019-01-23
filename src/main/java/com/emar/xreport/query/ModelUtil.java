@@ -1,8 +1,8 @@
 package com.emar.xreport.query;
 
-import com.emar.xreport.query.domain.SQLQuery;
+import com.emar.xreport.util.StringUtil;
 import com.emar.xreport.query.domain.Pagination;
-import com.emar.util.StringUtil;
+import com.emar.xreport.query.domain.SQLQuery;
 
 public class ModelUtil {
 	
@@ -11,24 +11,12 @@ public class ModelUtil {
 	/**
 	 * Get Table Name
 	 */
-	public static String getTableName (SQLQuery modelQuery, String prefix) {
-		
-		// level suffix
-		boolean isTotal = false; int level = 1;
-
-		// Construct Table Name
+	public static String getTableName (String prefix) {
 		StringBuffer tableName = new StringBuffer();
 		
 		// Prefix : system + theme
-		tableName.append("xv_").append(prefix);
-		tableName.append("_l").append(level);
+		tableName.append("tb_").append(prefix);
 
-		// total or not
-		if (isTotal) {
-			tableName.append("_1");
-		} else {
-			tableName.append("_0");
-		}
 		return tableName.toString();
 	}
 
@@ -50,19 +38,14 @@ public class ModelUtil {
 		sql.append(" FROM ");
 		
 		String havingSQL = query.getHavingSQL();
-		// 子查询
-		if (StringUtil.isNotEmpty(havingSQL)) {
+		if (StringUtil.isNotEmpty(havingSQL)) {// 子查询
 			sql.append("(SELECT * FROM ").append(table);
-			// Condition
-			sql.append(" WHERE ").append(whereSQL);
-			// Group By
-			sql.append(" GROUP BY ").append(groupSql);
-			// Having
-			sql.append(" HAVING ").append(havingSQL.substring(4));
+			sql.append(" WHERE ").append(whereSQL);// Condition
+			sql.append(" GROUP BY ").append(groupSql);// Group By
+			sql.append(" HAVING ").append(havingSQL.substring(4));// Having
 			sql.append(") T");
 		} else {
-			sql.append(table);
-			// Condition
+			sql.append(table);// Condition
 			sql.append(" WHERE ").append(whereSQL);
 		}
 		

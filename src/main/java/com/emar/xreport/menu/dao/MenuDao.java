@@ -1,19 +1,15 @@
 package com.emar.xreport.menu.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.emar.xreport.menu.domain.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
-import com.emar.xreport.menu.domain.Menu;
-import com.emar.xreport.model.domain.Template;
-import com.emar.xreport.sso.bean.User;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 菜单DAO
@@ -31,7 +27,7 @@ public class MenuDao {
 
 		String sql = "select name,url,subject from xv_menu where valid=1 order by subject,level,code";
 
-		final List<Menu> menuList = new ArrayList<Menu>();
+		final List<Menu> menuList = new ArrayList<>();
 		try {
 			modelTemplate.query(sql, new RowCallbackHandler() {
 				Menu parentMenu = null; int parentSign = -1;
@@ -55,22 +51,5 @@ public class MenuDao {
 			});
 		} catch (Exception e) {}
 		return menuList;
-	}
-
-	public Menu getTemplateMenu(User user) {
-		List<Menu> tepMenus = new ArrayList<Menu>();
-
-		Map<String, Template> templates = user.getTemplates();
-		if (templates == null || templates.isEmpty()) {
-			tepMenus.add(new Menu("添加模版", "/template/add"));
-		} else {
-			for (Template t : templates.values()) {
-				Menu menu = new Menu(t.getTitle());
-				menu.setUrl("/template/" + t.getTid());
-				tepMenus.add(menu);
-			}
-		}
-
-		return new Menu("我的模版", tepMenus);
 	}
 }

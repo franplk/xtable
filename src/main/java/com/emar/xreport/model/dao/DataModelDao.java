@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.emar.exception.BussinessException;
+import com.emar.xreport.exception.BusinessException;
 import com.emar.xreport.model.domain.ConfigColumn;
 import com.emar.xreport.model.domain.DataModel;
 
@@ -26,7 +26,7 @@ public class DataModelDao {
 
 	/**
 	 * 根据Dash Board Id 获取 Data Model
-	 * @throws BussinessException 
+	 * @throws BusinessException
 	 */
 	public DataModel getModel(String dashId) {
 
@@ -50,7 +50,7 @@ public class DataModelDao {
 				}
 			});
 		} catch (Exception e) {
-			throw new BussinessException("NO DataModel Found[DASHBOARD ID=" + dashId + "]", e);
+			throw new BusinessException("NO DataModel Found[DASHBOARD ID=" + dashId + "]");
 		}
 		
 		// Get Dim Column And Indexes Column
@@ -64,7 +64,7 @@ public class DataModelDao {
 
 	/**
 	 * Get Title Of Data Model
-	 * @throws BussinessException 
+	 * @throws BusinessException
 	 */
 	public List<ConfigColumn> getColumnList(String themeId) {
 
@@ -95,7 +95,7 @@ public class DataModelDao {
 				}
 			});
 		} catch (Exception e) {
-			throw new BussinessException("Query Column Failed[THEME ID=" + themeId + "]", e);
+			throw new BusinessException("Query Column Failed[THEME ID=" + themeId + "]");
 		}
 		return idxList;
 	}

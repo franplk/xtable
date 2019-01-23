@@ -84,9 +84,9 @@
 	</div>
 	
 	<!-- Drill Menu Item -->
-	<c:if test="${!empty dirllMenus}">
+	<c:if test="${!empty drillMenus}">
 		<div id="drillMenu" style="width:50px">
-			<c:forEach var="dirllItem" items="${ dirllMenus }">
+			<c:forEach var="dirllItem" items="${ drillMenus }">
 				<div data-options="iconCls:'icon-filter',href:'${ dirllItem.url }',name:'${ dirllItem.title }'">
 					${ dirllItem.label }
 				</div>

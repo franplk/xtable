@@ -1,7 +1,7 @@
 package com.emar.xreport.web;
 
-import com.emar.util.DateUtil;
-import com.emar.util.StringUtil;
+import com.emar.xreport.util.DateUtil;
+import com.emar.xreport.util.StringUtil;
 import com.emar.xreport.model.domain.ConfigColumn;
 import com.emar.xreport.model.domain.DataModel;
 import com.emar.xreport.web.domain.DateSpan;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.emar.xreport.query.domain.ConBean;
-import com.emar.util.StringUtil;
+import com.emar.xreport.util.StringUtil;
 
 /**
  * @author franplk

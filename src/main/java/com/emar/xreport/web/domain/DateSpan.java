@@ -1,6 +1,6 @@
 package com.emar.xreport.web.domain;
 
-import com.emar.util.StringUtil;
+import com.emar.xreport.util.StringUtil;
 
 public class DateSpan {
 

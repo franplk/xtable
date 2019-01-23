@@ -21,11 +21,4 @@ public class MenuService {
 	public List<Menu> getPageMenu() {
 		return menuDao.getPageMenu();
 	}
-
-	public void addMenu() {
-	}
-
-	public List<Menu> getMenus() {
-		return null;
-	}
 }

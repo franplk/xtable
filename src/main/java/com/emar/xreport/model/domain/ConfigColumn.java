@@ -9,11 +9,11 @@ public class ConfigColumn extends Column {
 
 	private static final long serialVersionUID = 1L;
 
-	private int dim;
-	private int flag;
-	private int sorting;
-	private String formula;
-	private String exValue;
+	private int dim; // 是否维度
+	private int flag;// 是否展示
+	private int sorting; // 是否可排序
+	private String formula;// 计算公式
+	private String exValue;// 维度方向排除值
 	private String mapName;
 	private String mapTitle;
 

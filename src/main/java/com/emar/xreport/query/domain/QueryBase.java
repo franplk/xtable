@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.emar.xreport.model.domain.ConfigColumn;
-import com.emar.util.StringUtil;
+import com.emar.xreport.util.StringUtil;
 import com.emar.xreport.web.domain.DateSpan;
 
 /**

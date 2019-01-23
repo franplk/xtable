@@ -3,7 +3,6 @@ package com.emar.xreport.web;
 import java.io.Serializable;
 
 /**
- * @domain WebPage
  * @author franplk
  */
 public class WebResult implements Serializable {
@@ -14,18 +13,6 @@ public class WebResult implements Serializable {
 	private String msg;// Failed Message
 	private Object data;// Query Web Page
 
-	public WebResult() {}
-
-	public WebResult(String msg, boolean success) {
-		this.msg = msg;
-		this.success = success;
-	}
-
-	public WebResult(Object data) {
-		this.success = true;
-		this.data = data;
-	}
-
 	public static WebResult success() {
 		return success(null);
 	}
@@ -34,6 +21,13 @@ public class WebResult implements Serializable {
 		WebResult webResult = new WebResult();
 		webResult.setSuccess(true);
 		webResult.setData(data);
+		return webResult;
+	}
+
+	public static WebResult fail(String msg) {
+		WebResult webResult = new WebResult();
+		webResult.setSuccess(false);
+		webResult.setMsg(msg);
 		return webResult;
 	}
 

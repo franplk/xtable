@@ -24,16 +24,15 @@ public class HomeController {
 
 	@RequestMapping(value = "/page")
 	public ModelAndView mainPage(ModelMap modelMap) {
-		// Query Menu List For The Different User
-		List<Menu> menuList = menuService.getPageMenu();
-
 		// Query The Entry Page For The Different User
 		EntryPage entryPage = pageService.getEntryPage();
-
 		modelMap.put("entryPage", entryPage);
+
+		// Query Menu List For The Different User
+		List<Menu> menuList = menuService.getPageMenu();
 		modelMap.put("menuList", menuList);
 
-		return new ModelAndView("/index", modelMap);
+		return new ModelAndView("/frame/index", modelMap);
 	}
 
 	@RequestMapping(value = "/welcome")

@@ -72,7 +72,7 @@ public class QueryBean implements Serializable {
 		info.append("DateSpan=").append(dateSpan).append(";");
 		info.append("OrderBy=").append(this.orderBy).append(";");
 		info.append("OrderType=").append(this.orderType).append(";");
-		info.append("Conditon=").append(this.paramMap).append(";");
+		info.append("Condition=").append(this.paramMap).append(";");
 		info.append("Pagination=").append(this.pagination);
 		info.append("]");
 		return info.toString();

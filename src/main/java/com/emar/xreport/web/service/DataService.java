@@ -1,17 +1,13 @@
 package com.emar.xreport.web.service;
 
-import com.emar.api.DataInter;
 import com.emar.xreport.model.domain.ConfigColumn;
 import com.emar.xreport.model.domain.Dashboard;
 import com.emar.xreport.model.domain.DataModel;
 import com.emar.xreport.model.domain.TableColumn;
-import com.emar.xreport.model.service.BoardService;
 import com.emar.xreport.query.domain.QueryBase;
 import com.emar.xreport.query.domain.SQLQuery;
-import com.emar.util.DateUtil;
 import com.emar.xreport.web.BaseService;
 import com.emar.xreport.web.dao.DataDao;
-import com.emar.xreport.web.domain.DateSpan;
 import com.emar.xreport.web.domain.JTableData;
 import com.emar.xreport.web.domain.QueryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,56 +24,30 @@ import java.util.List;
  */
 @Service
 @Component
-public class DataService extends BaseService implements DataInter<JTableData> {
+public class DataService extends BaseService {
 
-	@Autowired
-	private BoardService boardService;
-	
 	@Autowired
 	private DataDao dataDao;
-	
-	@Override
-	public JTableData getData(String boardId, QueryBean queryBean) {
-		
-		// Get Dash board
-		Dashboard dashboard = boardService.getBoard(boardId);
+
+	public JTableData getData(Dashboard dashboard, QueryBean queryBean) {
+		// Query Data
 		DataModel dataModel = dashboard.getDataModel();
-		
-		// Get Date Span
-		DateSpan dateSpan = queryBean.getDateSpan();
-		if (DateUtil.isToday(dateSpan)) {
-			//return getTodayData(dataModel, queryBean);
-		}
-		
-		JTableData hisData = getHisData(dataModel, queryBean);
-		
-		return hisData;
-	}
-
-	/**
-	 * Get Pagination Data For Specified Data Model
-	 */
-	private JTableData getHisData(DataModel dataModel, QueryBean queryBean) {
-		
-		JTableData tableData = null;
-		List<TableColumn> tableColumn = null;
-		
-		// Query From Mysql
 		SQLQuery mquery = getModelQuery(dataModel, queryBean);
-		tableData = dataDao.getTableData(mquery);
-		tableColumn = getTableColumn (mquery, false);
+		JTableData tableData = dataDao.getTableData(mquery);
 
+		// Get Columns
+		List<TableColumn> tableColumn = getTableColumn (mquery);
 		tableData.setColumns(tableColumn);
 		
 		return tableData;
 	}
 	
-	private List<TableColumn> getTableColumn (QueryBase query, boolean isEs) {
+	private List<TableColumn> getTableColumn (QueryBase query) {
 		// Columns
 		List<ConfigColumn> columns = new ArrayList<>();
 		columns.add(query.getDimColumn());
 		columns.addAll(query.getIdxList());
 		
-		return getTableColumn(columns, isEs);
+		return getTableColumn(columns);
 	}
 }
